@@ -10,14 +10,12 @@ $userQuiz = '';
 $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
 $_SESSION['idQuizz'] = $id;
 
+$title = exeSingleSelect('SELECT TITLE,USER_NAME FROM TITLE  WHERE ID = '.$id.';');
 
-
-$querie = 'SELECT USER_NAME,ID_IMAGE FROM `USER` WHERE USER_NAME = (SELECT USER_ID FROM TITLE WHERE ID = '.$id.');' ;
+$querie = 'SELECT USER_NAME,`IMAGE` FROM `USER` WHERE USER_NAME = "'.$title['USER_NAME'].'";' ;
 $userQuiz = exeSingleSelect($querie);
 
-$title = exeSingleSelect('SELECT TITLE FROM TITLE  WHERE ID = '.$id.';');
-
-$img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE ID = '.$userQuiz['ID_IMAGE'].';');
+$img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = "'.$userQuiz['IMAGE'].'";');
 ?>
 <!DOCTYPE html>
 <html lang="fr"> 
