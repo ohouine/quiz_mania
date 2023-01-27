@@ -1,0 +1,602 @@
+body{
+    background-image:url(../img/indexBackground.jpg);    
+    background-position-x: right;
+    background-size: cover;
+    background-position-y: bottom;
+    width: 100vw; 
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* INDEX */
+
+header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: solid 2px #8b1ac5;
+    margin-bottom: 2rem;
+    width: 80%;
+}
+
+header div{
+    display: flex;
+    width: 95vw;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.accountDiv{
+    justify-content: space-between !important;
+}
+
+.accountDiv div{
+    display: flex;
+    width: 10rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../img/moneyBack.png);
+    background-position-y: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.accountDiv p{
+    
+    color: black;
+}
+
+#userBlock{
+    background-color: rgb(37,37,37,90%);
+    width: 10rem;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    position:absolute;
+    right: 31px;
+    top: 53px;
+    display: none;
+}
+
+#userBlock a{
+    text-decoration: none;
+}
+
+#indexheader div{
+    justify-content: flex-end;
+}
+
+#indexheader img{
+    width: 3rem;
+}
+
+#connect{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(37,37,37);
+    width: 9rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    
+    box-shadow: 0px 0px 5px 2px rgb(20 96 85);
+
+}
+
+header img{
+    width: 7rem;
+}
+
+
+
+/* mian */
+
+main{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(22, 22, 22, 86%);
+}
+
+.nobkgr{
+    background-color: rgb(22, 22, 22, 0%);
+}
+
+main img{
+    width: 50%;
+}
+#indexDiv{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+} 
+
+#indexBody main{
+    height: 19rem;
+}
+
+#indexDiv div{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: space-around;
+    font-size: small;
+    align-items: center;
+    height: 2rem; 
+    width: 13rem;
+    border-radius: 30px;
+    padding: 0.2rem;
+    background-color: rgb(37, 37, 37);
+    box-shadow: 0px 0px 5px 2px rgb(132, 15, 168);
+}
+
+#indexDiv div img{
+    width: 15%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+#indexDiv div :target{
+    background-color: brown;
+}
+
+#indexDiv section{
+    visibility: hidden;
+    background-color: rgb(37, 37, 37,70%);
+    border-radius: 15px;
+}
+
+main p{
+    font-size: large;
+    text-align: center;
+}
+
+.ul_generator {
+    list-style-type: none;
+}
+
+main a{
+    margin: 0.5rem;
+    color: rgb(89, 89, 240);
+}
+main input[type = button]{
+    width: 130px;
+    background-color: #222222;
+    box-shadow: 0px 0px 2px #8b1ac5;
+    color: white;
+    border-radius: 15px;
+    height: 25px;
+}
+
+.btnQuizz{
+    text-decoration: none;
+    color: white;
+    margin: 0.2rem;
+}
+
+.btnQuizz div{
+    justify-content: space-around !important;
+    box-shadow: 0px 0px 5px 2px rgb(20 96 85) !important;
+}
+
+.btnQuizz img{
+    transform: rotate(0deg)   !important;
+    height: auto !important;
+    width: 11% !important;
+}
+
+/* footer */
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-top: 2rem; 
+    border-top: solid 2px #8b1ac5;
+    font-size:small ;
+}
+
+#indexFoot p{
+    font-size: smaller;
+}
+/* citation */
+
+#mianCitation img{
+    width: 2rem;
+}
+#mianCitation div{
+    margin: 0.5rem;
+}
+
+/* authre */
+span{
+    color:red;
+}
+
+/*Quizz Generator*/
+
+#body_allQ, #body_title{
+   /* background-image: url(../img/quizz_backgroud.jpg) !important;*/
+   background-image: url(../img/generatorBackground.jpg);
+   background-position-x: center;
+   background-size: cover;
+    height: 100vh;
+
+}
+
+#body_allQ header{
+    margin-bottom: 1rem;
+    border-bottom: solid 2px #383cd7;
+}
+
+#body_allQ header h1{
+    margin-top: 0.7rem;
+}
+
+#body_allQ main{
+    background-color: rgb(22, 22, 22, 0.87) ;
+    margin-bottom: 2rem;
+}
+
+#body_allQ form, #body_title form{ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+ul{
+    list-style-type: none;
+    padding-right: 1.5rem;
+}
+
+#body_allQ li, #body_title li{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0px;
+}
+
+#body_title input[type=text],#body_allQ input[type=text],select, #connectForm input[type=text], input[type=password], input[type=mail]{
+    margin-bottom: 1rem;
+    background-color: #c5d1d4;
+    border-radius: 10px;
+    width: 13rem;
+}
+
+#body_title select{
+    width: 9rem;
+    border: 0px;
+}
+
+#body_title select option{
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+
+}
+
+#body_title,#body_allQ input[type=submit]{
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    border: 0px;
+}
+
+/* make a quizz */
+
+/* All quizz */
+
+.fixBackground{
+    background-attachment: fixed;
+}
+
+#allQuizz_body a{
+    display:flex;
+}
+
+#allQuizz_body header{
+    border-bottom: solid 0px;
+    margin-bottom: 0px;
+}
+
+#allQuizz_body main{
+    padding-top: 0px;
+}
+
+#allQuizz_body li{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: space-around;
+    align-items: center;
+    width: 15rem;
+    height: 2rem;
+    border-radius: 30px;
+    padding: 0.2rem;
+}
+
+.titre_quizze{
+    width: 10rem;
+}
+
+.idQuiz{
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+#allQuizz_body a, p {
+    margin-right: 0.8rem;
+    color:white;
+    text-decoration: none;
+}
+
+/*Choosen quizz*/
+
+#presentation img{
+    width: 10rem;
+}
+
+#presentation button{
+    margin-top: 1rem;
+    background-color: #222222;
+    box-shadow: 0px 0px 4px #8b1ac5;
+    color: white;
+    border-radius: 15px;
+    height: 25px;
+}
+
+#presentation main{
+    margin-bottom: 3rem;
+}
+
+#choosenForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#choosenMain{
+    width: 100%;
+}
+
+#choosenForm div div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.questionDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    border-bottom: solid 2px #8b1ac5;
+    border-top: solid 2px #8b1ac5;
+}
+
+#choosenForm p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8.5rem;
+    height: 3.5rem;
+    border-radius: 10px;
+    background-color: rgb(37, 37, 37);  
+}
+
+.button-85 {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-85:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+  opacity: 70%;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+
+/* Result */
+
+#score{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#bodyScore{
+    height: 100vh;
+}
+
+/* Connexion */
+
+/* Connect */
+#connectForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#connectForm div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+
+/* Profile */
+
+#userImage_div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+#userImage_div img{
+    width: 7rem;
+}
+
+#changeProfile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    color: white;
+    background-color: rgb(12, 12, 12);
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: 25px;
+}
+
+#addPhoto{
+    width: 3rem !important;
+    position: absolute;
+    left: 170px;
+    top: 60px;
+}
+
+#hiddenImageDiv{
+    display: none;
+    justify-content: space-around;
+    position: absolute;
+    width: 15rem;
+    height: 17rem;
+    background-color: rgb(37,37,37,85%);
+    padding: 0.5rem;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.divImg a{
+    position: relative;
+}
+
+.divImg p{
+    position: absolute;
+    top: 37px;
+    right: 5px;
+}
+
+.divImg img{
+    width:5rem !important;
+    height: 5rem;
+    margin: 0.2rem;
+}
+
+#cross:after{
+    display: inline-block;
+    content: "\00d7"; /* This will render the 'X' */
+    transform: scale(3.2);
+}
+
+#crossDiv{
+    width: 100%;
+    height: 1rem;
+    margin: 0.2rem;
+}
+
+/* Shop */
+
+#shopMain{
+    width: 100%;
+}
+
+#icone{
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    flex-wrap: wrap;
+}
+
+#icone a{
+    margin-bottom: 2rem;
+}
+
+#toByDiv{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
