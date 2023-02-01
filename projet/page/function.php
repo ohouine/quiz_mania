@@ -203,8 +203,8 @@ function quizzDone($quizId){
     ]);
 }
 
-function verifyImgId($img){
-    $result = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = '.$img.';');
+function verifyImg($img){
+    $result = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = "'.$img.'";');
     return $result;
 }
 
@@ -215,4 +215,4 @@ function earnImage($img){
         ':userName' => $_SESSION['userName'] ,
         ':img' => $img,
     ]);
-}
+} 

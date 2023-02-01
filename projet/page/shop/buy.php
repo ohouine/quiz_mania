@@ -4,31 +4,30 @@ session_start();
 require_once '../function.php';
 if (!tokenSname()){header('location:../../index.php?alert=vous deez etre connectez pour accéder a cet page'); die();}
 
-$id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
+$imgName = filter_input(INPUT_GET,'img',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-if (!$id) { header("location:../../index.php?alert=une erreur c'est produite avec l'id");  die();}
-if(verifyImgId($id) == false) {header("location:../../index.php?alert=une erreur c'est produite avec l'id");  die();}
+if (!$imgName) { header("location:../../index.php?alert=une erreur c'est produite avec l'id");  die();}
+if(verifyImg($imgName) == false) { echo "sdfds";/*header("location:../../index.php?alert=une erreur c est produite avec l id");  die();*/}
 
-$userId = exeSingleSelect('SELECT ID,ACCOUNT FROM `USER` WHERE USER_NAME = "'.$_SESSION['userName'].'"');
+$userAccount = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = "'.$_SESSION['userName'].'"');
 
-$image = exeSingleSelect('SELECT ID,IMG,`VALUE` FROM `IMAGE` WHERE ID = '.$id.';');
+$image = exeSingleSelect('SELECT IMG,`VALUE` FROM `IMAGE` WHERE IMG = "'.$imgName.'";');
 
-if ($image['VALUE'] > $userId['ACCOUNT']) {
+if ($image['VALUE'] > $userAccount['ACCOUNT']) {
     header('location:shop.php?alert=vous ne posseder pas assez de KriegerHands');
     die();
 }
 
-if (exeSingleSelect('SELECT * FROM OWN_IMAGE WHERE OWN_IMAGE_ID	=  '.$image['ID'].' AND OWN_USER_ID = '.$userId['ID'].';') != false) {
+if (exeSingleSelect('SELECT * FROM OWN_IMAGE WHERE OWN_IMAGE =  "'.$image['IMG'].'" AND OWN_USER_NAME = "'.$_SESSION['userName'].'";') != false) {
     header('location:shop.php');
     die();
 }
 
 $toBuy = filter_input(INPUT_POST,'toBuy');
 
-var_dump($toBuy);
 if ($toBuy != null) {
     spendMoney($image['VALUE']);
-    earnImage($userId['ID'],$id);
+    earnImage($imgName);
     header('location:shop.php');
     die();
 }
@@ -58,7 +57,7 @@ if ($toBuy != null) {
 
         </div>
         <form action="#" method="post">
-            <input type="hidden" name="toBuy" value="kevin le bg">
+            <input type="hidden" name="toBuy" value="kevin le plus gros bg de la tere">
 
         <input type="submit" value="acheter pour <?= $image['VALUE'] ?>">
         </form>
