@@ -2,17 +2,17 @@
 session_start();
 require_once '../function.php';
 
-$id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
+$image = filter_input(INPUT_GET,'img',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 if (tokenSname()) {
     
-    $img = exeSingleSelect('SELECT * FROM `IMAGE` WHERE ID = '.$id.';');
+    $img = exeSingleSelect('SELECT * FROM `IMAGE` WHERE IMG = "'.$image.'";');
 
-    if ($img != false && $img['TYPE'] == 'icone' ) {
+    if ($image != false && $img['TYPE'] == 'icone' ) {
         
-        $statement = cnn()->prepare('UPDATE `USER` SET ID_IMAGE = :id WHERE USER_NAME = :userName;');
+        $statement = cnn()->prepare('UPDATE `USER` SET IMAGE = :img WHERE USER_NAME = :userName;');
         $statement->execute([
-            ':id' => $id,
+            ':img' => $image,
             ':userName' => $_SESSION['userName']
         ]);
         header('location:profil.php');

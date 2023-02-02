@@ -65,7 +65,7 @@ if (!$error) {
         </div>
 
         <div>
-            <label for="secPassword">Confirmé votre nouveaux mot de passe</label>
+            <label for="secPassword">Confirmé mot de passe</label>
             <span class="error"><?= $errorSecPassword ?></span>
             <input type="password" name="secPassword" id="secPassword">
         </div>

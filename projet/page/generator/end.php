@@ -15,7 +15,10 @@ if (!tokenSname()) {
     
     $statement = '';
 
-    
+    if (!array_key_exists('quizzGen',$_SESSION)) {
+        header('location:../../index.php?alert=une c est produite durant la generation de votre quizz');
+        die();
+    }
 
 if(!verifieTitle($_SESSION['quizzGen'][0]['title'])){
   header('location: canceling.php');
@@ -53,7 +56,8 @@ if ( !is_null($_SESSION['quizzGen'][3]) && !is_null($_SESSION['quizzGen'][2]) &&
         $statement = cnn()->prepare($question_querry);
        $statement->execute();
     } 
-  // header('location: canceling.php');
+  header('location: canceling.php');
+  die();
 }else {
     header('location: allQuest.php?mess=Veuillez créer au moins une question');
 }

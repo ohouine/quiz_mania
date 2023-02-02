@@ -377,6 +377,10 @@ ul{
     width: 100%;
 }
 
+#choosenMain h3{
+    font-size:  small;
+}
+
 #choosenForm div div{
     display: flex;
     flex-wrap: wrap;
@@ -385,7 +389,9 @@ ul{
 }
 
 .questionDiv{
+    width: 100vw;
     display: flex;
+    justify-content: center ;
     flex-direction: column;
     align-items: center;
     margin-bottom: 0.5rem;
@@ -401,6 +407,7 @@ ul{
     height: 3.5rem;
     border-radius: 10px;
     background-color: rgb(37, 37, 37);  
+    font-size: small;
 }
 
 .button-85 {

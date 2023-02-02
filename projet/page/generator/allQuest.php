@@ -160,19 +160,19 @@ creation des question pour implementatation de celle ci dans labase de donnees
                     <input type="text" name="quest" maxlength="35" value="<?= $questionValue ?>">
                 </li>
                 <li>
-                    <label for="rep1">Reponse n°1 <small>(13 max)</small></label>
+                    <label for="rep1">Reponse n°1 <small>(15 max)</small></label>
                     <span  class="error"><?= $rep1Errtxt ?></span>
-                    <input type="text" name="rep1" id="rep1" maxlength="13" value="<?= $rep1Value ?>">
+                    <input type="text" name="rep1" id="rep1" maxlength="15" value="<?= $rep1Value ?>">
                 </li>
                 <li>                    
-                    <label for="rep2">Reponse n°2 <small>(13 max)</small></label>
+                    <label for="rep2">Reponse n°2 <small>(15 max)</small></label>
                     <span  class="error"><?= $rep2Errtxt ?></span>
-                    <input type="text" name="rep2" id="rep2" maxlength="13" value="<?= $rep2Value ?>">
+                    <input type="text" name="rep2" id="rep2" maxlength="15" value="<?= $rep2Value ?>">
                 </li>
                 <li>
-                        <label for="rep3">Reponse n°3 <small>(13 max)</small></label>
+                        <label for="rep3">Reponse n°3 <small>(15 max)</small></label>
                         <span  class="error"><?= $rep3Errtxt ?></span>
-                        <input type="text" name="rep3" id="rep3" maxlength="13" value="<?= $rep3Value ?>">
+                        <input type="text" name="rep3" id="rep3" maxlength="15" value="<?= $rep3Value ?>">
                         </li>
                 <li>
                     <label for="goodReponse">Bonne reponse</label>

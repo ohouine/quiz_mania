@@ -17,20 +17,19 @@ foreach ($_POST as $i => $value) {
 $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 $score = verifieAllRep($arrayReponse);
-$maxScore = exeSingleSelect('SELECT COUNT(GOODREPONSE)AS"max" FROM QUESTION WHERE ID_TITLE = '.$_SESSION["idQuizz"].';');
+$maxScore = exeSingleSelect('SELECT COUNT(GOODREPONSE)AS"max" FROM QUESTION WHERE TITLE_ID = '.$_SESSION["idQuizz"].';');
 
 
 if (tokenSname() && $score === $maxScore['max']) {
 
     $quizId = exeSingleSelect('SELECT ID FROM TITLE WHERE TITLE = "'.$title.'";');
-    $userId = exeSingleSelect('SELECT ID FROM `USER` WHERE USER_NAME ="'.$_SESSION['userName'].'";');
 
-    if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_ID = '.$userId['ID'].' AND DONE_QUIZ_ID = '.$quizId['ID'].';') == false) {
+    if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = "'.$_SESSION['userName'].'" AND DONE_QUIZ_ID = '.$quizId['ID'].';') == false) {
 
         $earn = exeSingleSelect('SELECT `VALUE` FROM TITLE WHERE TITLE = "'.$title.'";');
         earnMoney($earn['VALUE']);
         $message = '+'.$earn['VALUE'];
-        quizzDone($quizId['ID'],$userId['ID']);
+        quizzDone($quizId['ID']);
 
     }
 }

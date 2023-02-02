@@ -41,7 +41,7 @@ if ($_SESSION['userName'] == 'admin') {
                 <?php
                     foreach ($ownedImage as $i => $value) {
                         $img = exeSingleSelect('SELECT * FROM `IMAGE` WHERE IMG = "'.$value['OWN_IMAGE'].'";');
-                        echo '<a href="changePhoto.php?id='.$value['OWN_IMAGE'].'"><img src="../../img/'.$img['IMG'].'" alt="image de profil"></a>';
+                        echo '<a href="changePhoto.php?img='.$value['OWN_IMAGE'].'"><img src="../../img/'.$img['IMG'].'" alt="image de profil"></a>';
                     }
                 ?>
             </div>

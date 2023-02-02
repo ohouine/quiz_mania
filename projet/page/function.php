@@ -43,7 +43,7 @@ function exeSingleSelect($querie):array|false
 // verifie all reponse of quzz
 function verifieAllRep(array $rep):int{
     $score = 0;
-    $allGoodRep = exeMultiSelect("SELECT GOODREPONSE FROM QUESTION WHERE ID_TITLE = ".$_SESSION['idQuizz']."");
+    $allGoodRep = exeMultiSelect("SELECT GOODREPONSE FROM QUESTION WHERE TITLE_ID = ".$_SESSION['idQuizz']."");
     foreach ($allGoodRep as $i => $value) {
         $transition = str_replace(' ','',$value['GOODREPONSE']);
         if ($transition == $rep[$i]) {
