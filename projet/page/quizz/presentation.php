@@ -10,12 +10,17 @@ $userQuiz = '';
 $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
 $_SESSION['idQuizz'] = $id;
 
-$title = exeSingleSelect('SELECT TITLE,USER_NAME FROM TITLE  WHERE ID = '.$id.';');
+$title = exeSingleSelect('SELECT TITLE,USER_NAME,CERTIFY FROM TITLE  WHERE ID = '.$id.';');
 
 $querie = 'SELECT USER_NAME,`IMAGE` FROM `USER` WHERE USER_NAME = "'.$title['USER_NAME'].'";' ;
 $userQuiz = exeSingleSelect($querie);
 
 $img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = "'.$userQuiz['IMAGE'].'";');
+
+$certif = '';
+
+if($title['CERTIFY']) $certif = 'certifier par le boss';
+else $certif = '';
 ?>
 <!DOCTYPE html>
 <html lang="fr"> 
@@ -33,8 +38,9 @@ $img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = "'.$userQuiz['IMAGE'
     </header>
     <main id="presentation">
         <h1>By <?= $userQuiz['USER_NAME'] ?></h1>
+        <h4><?=$certif?></h4>
         <img src="../../img/<?= $img['IMG'] ?>" alt="image de profiles">
-         <a href="quizzAll.php?id=<?=$id?>&title=<?= $title['TITLE'] ?>"><button>Commencer le quizz</button></a>
+        <a href="quizzAll.php?id=<?=$id?>&title=<?= $title['TITLE'] ?>"><button>Commencer le quizz</button></a>
     </main>
 </body>
 </html>

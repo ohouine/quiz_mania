@@ -23,7 +23,7 @@ $maxScore = exeSingleSelect('SELECT COUNT(GOODREPONSE)AS"max" FROM QUESTION WHER
 if (tokenSname() && $score === $maxScore['max']) {
 
     $quizId = exeSingleSelect('SELECT ID FROM TITLE WHERE TITLE = "'.$title.'";');
-
+    
     if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = "'.$_SESSION['userName'].'" AND DONE_QUIZ_ID = '.$quizId['ID'].';') == false) {
 
         $earn = exeSingleSelect('SELECT `VALUE` FROM TITLE WHERE TITLE = "'.$title.'";');

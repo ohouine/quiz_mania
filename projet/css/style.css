@@ -307,6 +307,15 @@ ul{
     background-attachment: fixed;
 }
 
+#allQuizzUl div{
+    display: flex;
+    padding-right: 0.7rem;
+}
+
+#allQuizzUl img{
+    width: 2.5rem;
+}
+
 #allQuizz_body a{
     display:flex;
 }
@@ -596,6 +605,7 @@ ul{
     height: auto;
     padding: 0.5rem;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 #icone a{

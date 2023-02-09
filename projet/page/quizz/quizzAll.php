@@ -33,6 +33,7 @@ $allQuest = exeMultiSelect($querie);
             <?php
 
             foreach ($allQuest as $i => $value) {
+
                 echo 
                 "<div class='questionDiv'>
                     <h3> ".$allQuest[$i]['QUESTION']."</h3>
