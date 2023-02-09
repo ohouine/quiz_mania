@@ -24,9 +24,9 @@ if ($password === '' || $password === false) {
 
 if ($user != null && $password != null && $error == false) {
     
-        $quereie = 'SELECT USER_NAME, `PASSWORD` FROM USER WHERE USER_NAME = "'.$user.'"';
+        $quereie = 'SELECT USER_NAME, `PASSWORD` FROM USER WHERE USER_NAME = :user ';
         
-        $result = exeMultiSelect($quereie);
+        $result = exeMultiSelect($quereie,[':user' => $user]);
 
         if (empty($result)) {
             $error = true;

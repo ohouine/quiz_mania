@@ -6,7 +6,7 @@ if (!tokenSname()) {
     header('location:../../index.php?alert=votre connection n est pas valide');
 }
 
-$userInfo = exeSingleSelect('SELECT USER_NAME,EMAIL FROM `USER` WHERE USER_NAME = "'.$_SESSION['userName'].'";');
+$userInfo = exeSingleSelect('SELECT USER_NAME,EMAIL FROM `USER` WHERE USER_NAME = :user;',[':user' => $_SESSION['userName']]);
 
 $errorUser = '';
 $errorMail = '';
@@ -52,9 +52,9 @@ if(!$error){
 
 if (!$error) {
 
-    $oldData = exeSingleSelect('SELECT EMAIL,`PASSWORD` FROM `USER` WHERE USER_NAME = "'.$_SESSION['userName'].'";');
-    $verifMailExists = exeSingleSelect('SELECT EMAIL FROM `USER` WHERE EMAIL = "'.$mail.'" AND USER_NAME != "'.$_SESSION['userName'].'";');
-    $verifNameExists = exeSingleSelect('SELECT USER_NAME FROM `USER` WHERE USER_NAME = "'.$user.'" AND USER_NAME != "'.$_SESSION['userName'].'";');
+    $oldData = exeSingleSelect('SELECT EMAIL,`PASSWORD` FROM `USER` WHERE USER_NAME = :user;',[':user' => $_SESSION['userName']]);
+    $verifMailExists = exeSingleSelect('SELECT EMAIL FROM `USER` WHERE EMAIL = :mail AND USER_NAME != :user ;',[':mail' => $mail, ':user' => $_SESSION['userName']]);
+    $verifNameExists = exeSingleSelect('SELECT USER_NAME FROM `USER` WHERE USER_NAME = :userName AND USER_NAME != :user;',[':userName' => $user, ':user' => $_SESSION['userName']]);
 
     $sameUser = true;
     $sameMail = true;

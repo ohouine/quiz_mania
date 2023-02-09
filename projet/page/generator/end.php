@@ -44,7 +44,7 @@ if ( !is_null($_SESSION['quizzGen'][3]) && !is_null($_SESSION['quizzGen'][2]) &&
         ':account' => $value,
     ]);
 
-    $arrayTitleId = exeMultiSelect($querieTitleId);
+    $arrayTitleId = exeMultiSelect($querieTitleId,[]);
     $titleID = $arrayTitleId[0]['ID_MAX'];
 
     array_shift($_SESSION['quizzGen']);

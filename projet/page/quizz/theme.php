@@ -2,8 +2,6 @@
 require_once '../function.php';
 session_start();
 
-$allTheme = exeMultiSelect('SELECT * FROM THEME ;');
-
 $color = '';
 
 ?>
@@ -25,8 +23,8 @@ $color = '';
         <ul>
             <?php
             
-            $theme = exeMultiSelect('SELECT * FROM THEME;');
-            foreach ($allTheme as $i => $value) {
+            $theme = exeMultiSelect('SELECT * FROM THEME;',[]);
+            foreach ($theme as $i => $value) {
                 
                 switch ($theme[$i]['ID']) {
                     case '1':

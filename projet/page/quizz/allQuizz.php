@@ -4,8 +4,8 @@ session_start();
 $_SESSION['index'] = 0;
 $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
 
-$allTitle = exeMultiSelect('SELECT * FROM TITLE  WHERE ID_THEME = '.$id.';');
-$theme = exeSingleSelect('SELECT * FROM THEME WHERE ID = '.$id.';');
+$allTitle = exeMultiSelect('SELECT * FROM TITLE  WHERE ID_THEME = :id;',[':id' => $id]);
+$theme = exeSingleSelect('SELECT * FROM THEME WHERE ID = :id;',[':id' => $id]);
 
 if ($allTitle === false || $theme === false ) {
     header("location:../../index.php? alert= oops une erreur viens de se produire id potentiellement out of range");
@@ -41,7 +41,7 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
             $quizzValue =  '<img src="../../img/medaille1.png" alt="">';
 
             foreach ($allTitle as $i => $value) {
-                $diff = exeMultiSelect('SELECT DIFFICULT FROM TITLE WHERE ID ='.$value['ID'].';');
+                $diff = exeMultiSelect('SELECT DIFFICULT FROM TITLE WHERE ID = :id ;', ['id' => $value['ID']]);
                 switch ($diff[0]['DIFFICULT']) {
                     case 'easy':
                         $color = '#17bf0b'; 
@@ -72,7 +72,7 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
                 }
                 $i += 1;
 
-                if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = "'.$_SESSION['userName'].'" AND DONE_QUIZ_ID = '.$value['ID'].';') == false) {
+                if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = :user AND DONE_QUIZ_ID = :id;',[':user' => $_SESSION['userName'], ':id' => $value['ID']]) == false) {
 
                     $quizzValue = $value['VALUE'];
                 }else { $quizzValue =  '<img src="../../img/medaille1.png" alt="">';}
@@ -82,7 +82,7 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
                 if ($adminOnly){
                     $isIt = 'block';
                     
-                    $certi = exeSingleSelect('SELECT CERTIFY FROM TITLE WHERE ID = '.$value['ID'].';');
+                    $certi = exeSingleSelect('SELECT CERTIFY FROM TITLE WHERE ID = :id;',[':id' => $value['ID']]);
 
                     if($certi['CERTIFY']) $isIt = 'none';
 

@@ -10,12 +10,12 @@ $userQuiz = '';
 $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
 $_SESSION['idQuizz'] = $id;
 
-$title = exeSingleSelect('SELECT TITLE,USER_NAME,CERTIFY FROM TITLE  WHERE ID = '.$id.';');
+$title = exeSingleSelect('SELECT TITLE,USER_NAME,CERTIFY FROM TITLE  WHERE ID = :id ;',[':id' => $id]);
 
-$querie = 'SELECT USER_NAME,`IMAGE` FROM `USER` WHERE USER_NAME = "'.$title['USER_NAME'].'";' ;
-$userQuiz = exeSingleSelect($querie);
+$querie = 'SELECT USER_NAME,`IMAGE` FROM `USER` WHERE USER_NAME = :title ;' ;
+$userQuiz = exeSingleSelect($querie,[':title' => $title['USER_NAME']]);
 
-$img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = "'.$userQuiz['IMAGE'].'";');
+$img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = :userImage;',[':userImage' => $userQuiz['IMAGE']]);
 
 $certif = '';
 

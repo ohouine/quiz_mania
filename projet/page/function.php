@@ -22,19 +22,19 @@ function cnn():PDO
 // Quizz
 
 //execute a SELECT and return the value 
-function exeMultiSelect($querie):array
+function exeMultiSelect($querie,$param):array
 {
     $statement = cnn()->prepare($querie);
-    $statement->execute();
+    $statement->execute($param);
     $result = $statement->fetchAll();
 
     return $result; 
 }
 
-function exeSingleSelect($querie):array|false
+function exeSingleSelect($querie,$param):array|false
 {
     $statement = cnn()->prepare($querie);
-    $statement->execute();
+    $statement->execute($param);
     $result = $statement->fetch();
 
     return $result; 
@@ -43,7 +43,7 @@ function exeSingleSelect($querie):array|false
 // verifie all reponse of quzz
 function verifieAllRep(array $rep):int{
     $score = 0;
-    $allGoodRep = exeMultiSelect("SELECT GOODREPONSE FROM QUESTION WHERE TITLE_ID = ".$_SESSION['idQuizz']."");
+    $allGoodRep = exeMultiSelect("SELECT GOODREPONSE FROM QUESTION WHERE TITLE_ID = :id",[':id' => $_SESSION['idQuizz']]);
     foreach ($allGoodRep as $i => $value) {
         $transition = str_replace(' ','',$value['GOODREPONSE']);
         if ($transition == $rep[$i]) {
@@ -59,8 +59,8 @@ function verifieAllRep(array $rep):int{
 
 // verifie if a user already exist
 function verifieUserExist($user):bool{
-        $querie = 'SELECT USER_NAME FROM `USER` WHERE USER_NAME = "'.$user.'";';
-        $result = exeSingleSelect($querie);
+        $querie = 'SELECT USER_NAME FROM `USER` WHERE USER_NAME = :user;';
+        $result = exeSingleSelect($querie,[':user' => $user]);
 
         if ($result != false) {
             return true;
@@ -69,8 +69,8 @@ function verifieUserExist($user):bool{
 }
 // verifie if a mail already exist
 function verifieMailExist($mail):bool{
-    $querie = 'SELECT EMAIL FROM `USER` WHERE EMAIL = "'.$mail.'";';
-    $result = exeSingleSelect($querie);
+    $querie = 'SELECT EMAIL FROM `USER` WHERE EMAIL = :mail;';
+    $result = exeSingleSelect($querie,[':mail' => $mail]);
 
     if ($result != false) {
         return true;
@@ -94,7 +94,7 @@ function addUser($user,$mail,$password):void{
 // connect a user if succes return true and add tokken and name on SESSION else return false 
 function connect($user, $password):void{
 
-    $token = exeSingleSelect('SELECT TOKEN FROM USER WHERE USER_NAME = "'.$user.'" ');
+    $token = exeSingleSelect('SELECT TOKEN FROM USER WHERE USER_NAME = :user;',[':user' => $user]);
 
     $_SESSION['token'] = $token['TOKEN'];
     $_SESSION['userName'] = $user;
@@ -132,9 +132,9 @@ function tokenSname():bool{
     }
 
     //echo 2;
-    $querie = 'SELECT TOKEN FROM USER WHERE USER_NAME = "'.$_SESSION['userName'].'";';
+    $querie = 'SELECT TOKEN FROM USER WHERE USER_NAME = :user;';
 
-    $result = exeMultiSelect($querie);
+    $result = exeMultiSelect($querie,[':user' => $_SESSION['userName']]);
 
     if ($result[0]['TOKEN'] != $_SESSION['token']) {
         return false;
@@ -146,7 +146,7 @@ function tokenSname():bool{
 
 //verifie if title already exists
 function verifieTitle($title):bool{
-    $result = exeMultiSelect('SELECT * FROM TITLE WHERE TITLE = "'.$title.'";');
+    $result = exeMultiSelect('SELECT * FROM TITLE WHERE TITLE = :title ;',[':title' => $title]);
 
     if ($result != false) {
         return false;
@@ -157,14 +157,14 @@ function verifieTitle($title):bool{
 
 function getUserImg() {
     if (tokenSname()) {
-        $img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = (SELECT `IMAGE` FROM `USER` WHERE USER_NAME = "'.$_SESSION['userName'].'")');
+        $img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = (SELECT `IMAGE` FROM `USER` WHERE USER_NAME = :user")',[':user' => $_SESSION['userName']]);
         return $img['IMG'];
     }
     return 'account.png';
 }
 
 function getUserAccount(){
-    $result = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = "'.$_SESSION['userName'].'"; ');
+    $result = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = :user; ',[':user' => $_SESSION['userName']]);
     return $result['ACCOUNT'];
 }
 
@@ -204,7 +204,7 @@ function quizzDone($quizId){
 }
 
 function verifyImg($img){
-    $result = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = "'.$img.'";');
+    $result = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = :img;',[':img' => $img]);
     return $result;
 }
 

@@ -6,7 +6,7 @@ $image = filter_input(INPUT_GET,'img',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 if (tokenSname()) {
     
-    $img = exeSingleSelect('SELECT * FROM `IMAGE` WHERE IMG = "'.$image.'";');
+    $img = exeSingleSelect('SELECT * FROM `IMAGE` WHERE IMG = :img;',[':img' => $image]);
 
     if ($image != false && $img['TYPE'] == 'icone' ) {
         

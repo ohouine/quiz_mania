@@ -11,8 +11,8 @@ $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
 $title = filter_input(INPUT_GET,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $_SESSION['idQuizz'] = $id;
 
-$querie = 'SELECT QUESTION,REP1,REP2,REP3,TITLE_ID FROM QUESTION WHERE TITLE_ID = '.$id.';';
-$allQuest = exeMultiSelect($querie);
+$querie = 'SELECT QUESTION,REP1,REP2,REP3,TITLE_ID FROM QUESTION WHERE TITLE_ID = :id;';
+$allQuest = exeMultiSelect($querie,[':id' => $id]);
 ?>
 <!DOCTYPE html>
 <html lang="fr"> 
