@@ -24,9 +24,9 @@ if (tokenSname() && $score === $maxScore['max']) {
 
     $quizId = exeSingleSelect('SELECT ID FROM TITLE WHERE TITLE = :title;',[':title' => $title]);
     
-    if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = "'.$_SESSION['userName'].'" AND DONE_QUIZ_ID = '.$quizId['ID'].';') == false) {
+    if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = :user AND DONE_QUIZ_ID = :id ;',[':user' => $_SESSION['userName'], ':id' => $quizId['ID']]) == false) {
 
-        $earn = exeSingleSelect('SELECT `VALUE` FROM TITLE WHERE TITLE = "'.$title.'";');
+        $earn = exeSingleSelect('SELECT `VALUE` FROM TITLE WHERE TITLE = :title;',[':title' => $title]);
         earnMoney($earn['VALUE']);
         $message = '+'.$earn['VALUE'];
         quizzDone($quizId['ID']);

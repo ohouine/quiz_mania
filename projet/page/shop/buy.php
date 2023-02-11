@@ -9,16 +9,16 @@ $imgName = filter_input(INPUT_GET,'img',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 if (!$imgName) { header("location:../../index.php?alert=une erreur c'est produite avec l'id");  die();}
 if(verifyImg($imgName) == false) { echo "sdfds";/*header("location:../../index.php?alert=une erreur c est produite avec l id");  die();*/}
 
-$userAccount = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = "'.$_SESSION['userName'].'"');
+$userAccount = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = :user',[':user' => $_SESSION['userName']]);
 
-$image = exeSingleSelect('SELECT IMG,`VALUE` FROM `IMAGE` WHERE IMG = "'.$imgName.'";');
+$image = exeSingleSelect('SELECT IMG,`VALUE` FROM `IMAGE` WHERE IMG = :img ;',[':img' => $imgName]);
 
 if ($image['VALUE'] > $userAccount['ACCOUNT']) {
     header('location:shop.php?alert=vous ne posseder pas assez de KriegerHands');
     die();
 }
 
-if (exeSingleSelect('SELECT * FROM OWN_IMAGE WHERE OWN_IMAGE =  "'.$image['IMG'].'" AND OWN_USER_NAME = "'.$_SESSION['userName'].'";') != false) {
+if (exeSingleSelect('SELECT * FROM OWN_IMAGE WHERE OWN_IMAGE =  :img AND OWN_USER_NAME = :user ;',[':img' => $image['IMG'], ':user' => $_SESSION['userName']]) != false) {
     header('location:shop.php');
     die();
 }

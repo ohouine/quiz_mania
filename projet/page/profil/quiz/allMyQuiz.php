@@ -1,13 +1,13 @@
 
 <?php
-require_once '../function.php';
+require_once '../../function.php';
 session_start();
 $_SESSION['index'] = 0;
 $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
 
-$allTitle = exeMultiSelect('SELECT * FROM TITLE  WHERE USER_NAME = :id;',[':id' => $id]);
-
-if ($allTitle === false || $theme === false ) {
+$allTitle = exeMultiSelect('SELECT * FROM TITLE  WHERE USER_NAME = :user;',[':user' => $_SESSION['userName']]);
+var_dump($allTitle);
+if ($allTitle === false) {
     header("location:../../index.php? alert= oops une erreur viens de se produire id potentiellement out of range");
     die();
 }
@@ -27,21 +27,20 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/style.css">
     <title>choose one</title>
 </head>
 <body id='allQuizz_body' class="fixBackground">
     <header>
-        <?= headerDiv() ?>
-        <h2><?= strtoupper($theme['CATEGORY']) ?></h2>
+    <div> <a href="../../../index.php"> <img src="../../../img/flecheGriffeLong.png" alt="fleche de retour"> </a></div>
+        <h2></h2>
     </header>
     <main class="nobkgr">
         <ul id="allQuizzUl">
             <?php
-            $quizzValue =  '<img src="../../img/medaille1.png" alt="">';
 
             foreach ($allTitle as $i => $value) {
-                $diff = exeMultiSelect('SELECT DIFFICULT FROM TITLE WHERE ID =:id ;',[':id' => $value['ID']]);
+                $diff = exeMultiSelect('SELECT DIFFICULT FROM TITLE WHERE ID = :id ;', ['id' => $value['ID']]);
                 switch ($diff[0]['DIFFICULT']) {
                     case 'easy':
                         $color = '#17bf0b'; 
@@ -72,23 +71,7 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
                 }
                 $i += 1;
 
-                if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = :user AND DONE_QUIZ_ID = :id;',[':user' => $_SESSION['userName'], ':id' => $id]) == false) {
-
-                    $quizzValue = $value['VALUE'];
-                }else { $quizzValue =  '<img src="../../img/medaille1.png" alt="">';}
-
-                echo '<a href="presentation.php?id='.$value['ID'].'"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze">'. $value['TITLE'].'</p> <div>'.$quizzValue.'</div> </li></a>';
-                
-                if ($adminOnly){
-                    $isIt = 'block';
-                    
-                    $certi = exeSingleSelect('SELECT CERTIFY FROM TITLE WHERE ID = :id;',[':id' => $value['ID']]);
-
-                    if($certi['CERTIFY']) $isIt = 'none';
-
-                    echo '<li><a href="../admin/certified.php?id='.$value["ID"].'&theme='.$id.'" style="display:'.$isIt.';">certified</a> <a href="../admin/deleteQuiz.php?id='.$value["ID"].'&theme='.$id.'">suprimer</a></li>';
-
-                }
+                echo '<a href="presentation.php?id='.$value['ID'].'"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze">'. $value['TITLE'].'</p> <div>'.$value['VALUE'].'</div> </li></a>';
                     
             }
         ?>

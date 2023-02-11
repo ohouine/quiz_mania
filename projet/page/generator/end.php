@@ -10,7 +10,7 @@ require_once '../const.php';
 
 if (!tokenSname()) {
     header('location: canceling.php');
-   die();
+    die();
 }
     
     $statement = '';

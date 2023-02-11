@@ -157,7 +157,7 @@ function verifieTitle($title):bool{
 
 function getUserImg() {
     if (tokenSname()) {
-        $img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = (SELECT `IMAGE` FROM `USER` WHERE USER_NAME = :user")',[':user' => $_SESSION['userName']]);
+        $img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = (SELECT `IMAGE` FROM `USER` WHERE USER_NAME = :user)',[':user' => $_SESSION['userName']]);
         return $img['IMG'];
     }
     return 'account.png';

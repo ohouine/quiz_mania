@@ -6,7 +6,7 @@ require_once '../function.php';
 if (!tokenSname()) header('location:../../index.php?alert=vous deez etre connectez pour accéder a cet page');
 $icone = exeMultiSelect('SELECT IMG,`VALUE` FROM `IMAGE` WHERE `TYPE` = "icone" ORDER BY `VALUE`',[]);
 
-$userAccount = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = "'.$_SESSION['userName'].'"');
+$userAccount = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = :user ',[':user' => $_SESSION['userName']]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +35,7 @@ $userAccount = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = "'.
                     
 
                     
-                    if (exeSingleSelect('SELECT * FROM OWN_IMAGE WHERE OWN_IMAGE="'.$value['IMG'].'" AND OWN_USER_NAME = "'.$_SESSION['userName'].'";') != false) $price = 'acheté';
+                    if (exeSingleSelect('SELECT * FROM OWN_IMAGE WHERE OWN_IMAGE= :img AND OWN_USER_NAME = :user ;',[':user' => $_SESSION['userName'], ':img' => $value['IMG']]) != false) $price = 'acheté';
                     elseif ($price > $userAccount['ACCOUNT']) {
                          $color = 'red';
                     }

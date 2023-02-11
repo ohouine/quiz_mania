@@ -47,7 +47,8 @@ if ($_SESSION['userName'] == 'admin') {
             </div>
         </div>
         <a href="modifyProfile.php" id="changeProfile">Modifier profil</a>
-        <a href="../connexion/deconexion.php">se deconnecter</a>
+        <a href="../connexion/deconexion.php" class="profileLink">se deconnecter</a>
+        <a href="quiz/allMyQuiz.php" class="profileLink">tous mes quizzes</a>
     </main>
     <script src="../../js/hiddenImage.js"></script>
 </body>
