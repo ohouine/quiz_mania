@@ -5,6 +5,7 @@ require_once '../function.php';
 
 if (!tokenSname()) header('location:../../index.php?alert=vous deez etre connectez pour accéder a cet page');
 $icone = exeMultiSelect('SELECT IMG,`VALUE` FROM `IMAGE` WHERE `TYPE` = "icone" ORDER BY `VALUE`',[]);
+$question = exeMultiSelect('SELECT IMG,`VALUE` FROM `IMAGE` WHERE `TYPE` = "question" ORDER BY `VALUE`',[]);
 
 $userAccount = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = :user ',[':user' => $_SESSION['userName']]);
 ?>
@@ -42,11 +43,30 @@ $userAccount = exeSingleSelect('SELECT ACCOUNT FROM `USER` WHERE USER_NAME = :us
 
                     echo '<a href="buy.php?img='.$value['IMG'].'"><img src="../../img/'.$value['IMG'].'" alt="image de profil"> <p class="price" style="color:'.$color.';">'.$price.'</p></a>';
                 }
-
             ?>
+
         </div>
 
         <h1>image de quizz</h1>
+        <div id="questionImg" class="divImg">
+            <?php
+
+                foreach ($question as $i => $value) {
+                    $price = $value['VALUE'];
+                    $color = 'white';
+
+                
+
+                    if (exeSingleSelect('SELECT * FROM OWN_IMAGE WHERE OWN_IMAGE= :img AND OWN_USER_NAME = :user ;',[':user' => $_SESSION['userName'], ':img' => $value['IMG']]) != false) $price = 'acheté';
+                    elseif ($price > $userAccount['ACCOUNT']) {
+                         $color = 'red';
+                    }
+                
+                    echo '<a href="buy.php?img='.$value['IMG'].'"><img src="../../img/'.$value['IMG'].'" alt="image de profil"> <p class="price" style="color:'.$color.';">'.$price.'</p></a>';
+                }
+
+            ?>
+        </div>
     </main>
 </body>
 </html>

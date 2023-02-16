@@ -6,7 +6,7 @@ $_SESSION['index'] = 0;
 $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
 
 $allTitle = exeMultiSelect('SELECT * FROM TITLE  WHERE USER_NAME = :user;',[':user' => $_SESSION['userName']]);
-var_dump($allTitle);
+
 if ($allTitle === false) {
     header("location:../../index.php? alert= oops une erreur viens de se produire id potentiellement out of range");
     die();
@@ -71,10 +71,10 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
                 }
                 $i += 1;
 
-                echo '<a href="presentation.php?id='.$value['ID'].'"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze">'. $value['TITLE'].'</p> <div>'.$value['VALUE'].'</div> </li></a>';
+                echo '<a href="myQuiz.php?title='.$value['TITLE'].'&id='.$value['ID'].'"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze">'. $value['TITLE'].'</p> <div>'.$value['VALUE'].'</div> </li></a>';
                     
             }
-        ?>
+        ?>  
         </ul>
         
     </main> 

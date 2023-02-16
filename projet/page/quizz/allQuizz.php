@@ -72,10 +72,14 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
                 }
                 $i += 1;
 
-                if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = :user AND DONE_QUIZ_ID = :id;',[':user' => $_SESSION['userName'], ':id' => $value['ID']]) == false) {
+                $quizzValue = $value['VALUE'];
+                if (TokenSname()) {
+                    if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = :user AND DONE_QUIZ_ID = :id;',[':user' => $_SESSION['userName'], ':id' => $value['ID']]) == false) {
 
                     $quizzValue = $value['VALUE'];
-                }else { $quizzValue =  '<img src="../../img/medaille1.png" alt="">';}
+                    }   else { $quizzValue =  '<img src="../../img/medaille1.png" alt="">';}
+                }
+                
 
                 echo '<a href="presentation.php?id='.$value['ID'].'"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze">'. $value['TITLE'].'</p> <div>'.$quizzValue.'</div> </li></a>';
                 

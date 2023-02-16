@@ -33,8 +33,10 @@ if ($_SESSION['userName'] == 'admin') {
         <h2><?= $_SESSION['userName'] ?></h2>
 
         <div id="userImage_div">
-            <img src="../../img/<?= $img['IMG']?>" alt="image de profil" id="profilPhoto">      
-            <img src="../../img/addPhoto.png" alt="modifier image de profil" id="addPhoto">
+            <div id="clickable">
+                <img src="../../img/<?= $img['IMG']?>" alt="image de profil" id="profilPhoto">      
+                <img src="../../img/addPhoto.png" alt="modifier image de profil" id="addPhoto">
+            </div>
             
             <div id="hiddenImageDiv" class="divImg">
                 <div id="crossDiv"><div id='cross'></div></div> 
