@@ -12,6 +12,10 @@ body{
     align-items: center;
 }
 
+main a {
+    color: rgb(154 154 255) !important;
+}
+
 
 /* INDEX */
 
@@ -124,7 +128,7 @@ main img{
     flex-direction: column;
     width: 80%;
     align-items: center;
-} 
+}
 
 #indexBody main{
     height: 19rem;
@@ -143,6 +147,10 @@ main img{
     padding: 0.2rem;
     background-color: rgb(37, 37, 37);
     box-shadow: 0px 0px 5px 2px rgb(132, 15, 168);
+}
+
+#indexDiv a{
+    color: white !important;
 }
 
 #indexDiv div img{
@@ -308,12 +316,13 @@ ul{
 }
 
 #allQuizzUl div{
+    color: white !important;
     display: flex;
     padding-right: 0.7rem;
 }
 
 #allQuizzUl img{
-    width: 2.5rem;
+    width: 2.3rem;
 }
 
 #allQuizz_body a{
@@ -414,15 +423,19 @@ ul{
     border-top: solid 2px #8b1ac5;
 }
 
-#choosenForm p{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 8.5rem;
-    height: 3.5rem;
-    border-radius: 10px;
-    background-color: rgb(37, 37, 37);  
-    font-size: small;
+.rep{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 8.5rem !important;
+    height: 3rem;
+    border-radius: 10px !important;
+    background-color: rgb(37, 37, 37);
+    color: white !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    font-size: small !important;
+    border: solid 1px #c5b9b9 !important;
 }
 
 .button-85 {
@@ -541,6 +554,8 @@ ul{
     margin-top: 2rem;
 }
 
+
+
 #userImage_div img{
     width: 7rem;
 }
@@ -550,7 +565,7 @@ ul{
     align-items: center;
     justify-content: center;
     text-decoration: none !important;
-    color: white;
+    color: white !important;
     background-color: rgb(12, 12, 12);
     width: 8rem;
     height: 2.5rem;
@@ -595,7 +610,7 @@ ul{
 
 #cross:after{
     display: inline-block;
-    content: "\00d7"; /* This will render the 'X' */
+    content: "\00d7"; 
     transform: scale(3.2);
 }
 
@@ -638,4 +653,10 @@ ul{
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
+}
+
+/* change quizz */
+
+#newRep{
+    height: 1.5rem;
 }

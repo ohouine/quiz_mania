@@ -71,7 +71,7 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
                 }
                 $i += 1;
 
-                echo '<a href="myQuiz.php?title='.$value['TITLE'].'&id='.$value['ID'].'"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze">'. $value['TITLE'].'</p> <div>'.$value['VALUE'].'</div> </li></a>';
+                echo '<a href="myQuiz.php?title='.$value['TITLE'].'"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze">'. $value['TITLE'].'</p> <div>'.$value['VALUE'].'</div> </li></a>';
                     
             }
         ?>  

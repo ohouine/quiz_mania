@@ -39,9 +39,9 @@ $allQuest = exeMultiSelect($querie,[':id' => $id]);
                     <h3> ".$allQuest[$i]['QUESTION']."</h3>
                     <span class='error'></span>
                     <div classe='repDiv'>
-                        <p class='rep'> ".$allQuest[$i]['REP1']." </p>
-                        <p class='rep'> ".$allQuest[$i]['REP2']." </p>
-                        <p class='rep'> ".$allQuest[$i]['REP3']." </p>
+                        <div class='rep'> ".$allQuest[$i]['REP1']." </div>
+                        <div class='rep'> ".$allQuest[$i]['REP2']." </div>
+                        <div class='rep'> ".$allQuest[$i]['REP3']." </div>
                     </div>
                     <input type='hidden' name='reponse".$i."' class='inputReponse' value=''>
                 </div> ";

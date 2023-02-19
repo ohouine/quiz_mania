@@ -1,3 +1,4 @@
+
 let allRep = document.getElementsByClassName("rep");
 let reponse = document.getElementsByClassName("inputReponse")
 let errortxt = document.getElementsByClassName("error")
@@ -7,6 +8,7 @@ let c = console;
 let messEror = 'Choisissez une reponse'
 
 c.log(reponse[0].value)
+
 //Split given array in n array
 function sliceArray(arr, n) {
     let transitionArr = [];

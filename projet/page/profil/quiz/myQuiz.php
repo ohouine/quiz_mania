@@ -5,10 +5,8 @@ session_start();
 require_once '../../function.php';
 
 $title = filter_input(INPUT_GET,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
-
-$querie = 'SELECT QUESTION,REP1,REP2,REP3,TITLE_ID FROM QUESTION WHERE TITLE_ID = :id;';
-$allQuest = exeMultiSelect($querie,[':id' => $id]);
+$querie = 'SELECT * FROM QUESTION WHERE TITLE_ID = (SELECT ID FROM TITLE WHERE TITLE = :title);';
+$allQuest = exeMultiSelect($querie,[':title' => $title]);
 ?>
 <!DOCTYPE html>
 <html lang="fr"> 
@@ -21,36 +19,76 @@ $allQuest = exeMultiSelect($querie,[':id' => $id]);
 </head>
 <body id='choosenBody' class="fixBackground">
     <header>
-    <div class="accountDiv"> <a href="../../index.php"> <img src="../../../img/flecheGriffeLong.png" alt="fleche de retour"> </a> <div> <p><?= getUserAccount() ?></p></div></div>
+    <div class="accountDiv"> <a href="../../../index.php"> <img src="../../../img/flecheGriffeLong.png" alt="fleche de retour"> </a> <div> <p><?= getUserAccount() ?></p></div></div>
     
     </header>
     <main id="choosenMain">
         <form action="modify.php" method="post" id="choosenForm">
             
-        <h2><?= "<input type='text' name='newTitle' value=".$title." "; ?></h2>
+        <span class="error"><?= filter_input(INPUT_GET,'errTitle',FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?></span>
+        <div class='questionDiv'><h2><input type='text' name='newTitle' value='<?= $title; ?>' </h2></div>
             <?php
-
+            $color1;
+            $color2;
+            $color3;
             foreach ($allQuest as $i => $value) {
+                $color1 = 'rgb(37, 37, 37)';
+                $color2 = 'rgb(37, 37, 37)';
+                $color3 = 'rgb(37, 37, 37)';
+                
+                $color1 = ($allQuest[$i]['REP1'] === $value['GOODREPONSE']) ? 'black' : 'rgb(37, 37, 37)' ;
+                $color2 = ($allQuest[$i]['REP2'] === $value['GOODREPONSE']) ? 'black' : 'rgb(37, 37, 37)' ;
+                $color3 = ($allQuest[$i]['REP3'] === $value['GOODREPONSE']) ? 'black' : 'rgb(37, 37, 37)' ;
 
+                switch ($value['GOODREPONSE']) {
+                    case $allQuest[$i]['REP1']:
+                        $inptReponse = 'reponse1';
+                        break;
+
+                    case $allQuest[$i]['REP2']:
+                        $inptReponse = 'reponse2';
+                        break;
+
+                    case $allQuest[$i]['REP3']:
+                        $inptReponse = 'reponse3';
+                            break;
+
+                    default:
+                        $inptReponse = 'reponse1';
+                        break;
+                }
                 echo 
                 "<div class='questionDiv'>
-                <input type='text' name='question".$i."' value=".$allQuest[$i]['QUESTION'].">
+
+                    <input type='text' name='question".$i."' value='".$allQuest[$i]['QUESTION']."'>
                     <span class='error'></span>
+
                     <div classe='repDiv'>
-                        <input type='text' name='reponse1".$i."' value=".$allQuest[$i]['REP1'].">
-                        <input type='text' name='reponse2".$i."' value=".$allQuest[$i]['REP2'].">
-                        <input type='text' name='reponse3".$i."' value=".$allQuest[$i]['REP3'].">
+
+                        <input type='text' name='reponse1".$i."' value='".$allQuest[$i]['REP1']."'>
+                        <input type='text' name='reponse2".$i."' value='".$allQuest[$i]['REP2']."'>
+                        <input type='text' name='reponse3".$i."' value='".$allQuest[$i]['REP3']."'>
+                        
+                        <div><p>bonne reponse : </p></div>
+
+                        <div id='newRep' class='rep' style='background-color: ". $color1 ." ;'>reponse1</div>
+                        <div id='newRep' class='rep' style='background-color: ". $color2 ." ;'>reponse2</div>
+                        <div id='newRep' class='rep' style='background-color: ". $color3 ." ;'>reponse3</div>
+                        
+
+                        <input type='hidden' name='goodRp".$i."' class='inputReponse' value=".$inptReponse.">
                     </div>
+
                 </div> ";
             }
             ?>
-            <input type="hidden" name="title" value="<?= $title ?>">
+            <input type="hidden" name="oldTitle" value="<?= $title ?>">
         
-        <button class="button-85" role="button" id="sub">Modifier</button>
+        <div><button class="button-85" role="button" id="sub">Modifier</button></div>
         
         </form>
     </main>
 </body>
-<script type="" src="../../js/quizzAll.js"></script>
+<script type="" src="../../../js/quizzAll.js"></script>
 </html>
 <?php

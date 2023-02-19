@@ -77,7 +77,7 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
                     if (exeSingleSelect('SELECT * FROM QUIZZ_DONE WHERE DONE_USER_NAME = :user AND DONE_QUIZ_ID = :id;',[':user' => $_SESSION['userName'], ':id' => $value['ID']]) == false) {
 
                     $quizzValue = $value['VALUE'];
-                    }   else { $quizzValue =  '<img src="../../img/medaille1.png" alt="">';}
+                    }   else { $quizzValue =  '<img src="../../img/etoile.png" alt="">';}
                 }
                 
 

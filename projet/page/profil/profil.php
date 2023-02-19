@@ -10,6 +10,7 @@ if (!tokenSname()){
 $img = exeSingleSelect('SELECT IMG FROM `IMAGE` WHERE IMG = (SELECT `IMAGE` FROM `USER` WHERE USER_NAME = :user);',[':user' => $_SESSION['userName']]);
 
 $ownedImage = exeMultiSelect('SELECT OWN_IMAGE FROM OWN_IMAGE WHERE OWN_USER_NAME = :own;',[':own' => $_SESSION['userName']]);
+
 if ($_SESSION['userName'] == 'admin') {
     echo '<a href="../admin/addImage.php">add image</a>';
 }
@@ -42,8 +43,12 @@ if ($_SESSION['userName'] == 'admin') {
                 <div id="crossDiv"><div id='cross'></div></div> 
                 <?php
                     foreach ($ownedImage as $i => $value) {
-                        $img = exeSingleSelect('SELECT * FROM `IMAGE` WHERE IMG = :ownImage;',[':ownImage' => $value['OWN_IMAGE']]);
-                        echo '<a href="changePhoto.php?img='.$value['OWN_IMAGE'].'"><img src="../../img/'.$img['IMG'].'" alt="image de profil"></a>';
+                        $imgType = exeSingleSelect('SELECT `TYPE` FROM  `IMAGE` WHERE IMG = :img',[':img' => $value['OWN_IMAGE']]);
+
+                        if ($imgType['TYPE'] == 'icone') {
+                            
+                            echo '<a href="changePhoto.php?img='.$value['OWN_IMAGE'].'"><img src="../../img/'.$value['OWN_IMAGE'].'" alt="image de profil"></a>';
+                        }
                     }
                 ?>
             </div>
