@@ -70,7 +70,7 @@ switch ($score) {
     <title>Resultat</title>
 </head>
 <body id="bodyScore">
-    <header>
+    <header  class="fullHeader">
     <?= headerDiv() ?>
     <h2><?= $title ?></h2>
     </header>

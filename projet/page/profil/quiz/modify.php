@@ -6,28 +6,36 @@ if (!tokenSname()) {
     die();
 }
 
-if(!verifieTitle($_POST['newTitle'])){
-        header('location:myQuiz.php?title='.$_POST['oldTitle'].'&errTitle=ce titre exists dejas');
+//filter input batard
+    $oldTitle = $_SESSION['modifyOldTitle'];
+    $newTitle = filter_input(INPUT_POST,'newTitle',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+$isMine = exeSingleSelect('SELECT ID FROM TITLE WHERE TITLE = :title AND USER_NAME = :userName',[':title' => $_SESSION['modifyOldTitle'], ':userName' => $_SESSION['userName']]);
+if (!$isMine) {
+    header('location:../../../index.php?alert=ohh mon dieux vous etes degoutant cela ne se fait pas de toucher aux quiz d un autre homme');
+    die();
+}
+$alreadyExists = exeSingleSelect('SELECT ID FROM TITLE WHERE TITLE = :title AND ID != :id',[':title' => $_SESSION['modifyOldTitle'], ':id' => $_SESSION['modifyId']]);
+if($alreadyExists != false){
+        header('location:myQuiz.php?title='.$_SESSION['modifyOldTitle'].'&errTitle=ce titre exists dejas');
         die();
 }
 try {
 
-    //filter input batard
-    $questionId = exeMultiSelect("SELECT ID FROM QUESTION WHERE TITLE_ID = (SELECT ID FROM TITLE WHERE TITLE = :title)",[':title' => $_POST['oldTitle']]);
+    
+    $questionId = exeMultiSelect("SELECT ID FROM QUESTION WHERE TITLE_ID = (SELECT ID FROM TITLE WHERE TITLE = :title)",[':title' => $oldTitle]);
     
     $querie = "UPDATE TITLE SET TITLE = :newTitle WHERE TITLE = :oldTitle ";
     $statement = cnn()->prepare($querie);
     $statement->execute([
-        ':newTitle' => $_POST['newTitle'],
-        ':oldTitle' => $_POST['oldTitle'],
+        ':newTitle' => $newTitle,
+        ':oldTitle' => $oldTitle,
     ]);
 
 } catch (\Throwable $th) {
-    header('location:myQuiz.php?title='.$title.'&errTitle=une erruer c&acuteest produite avec le titre');
+    header('location:myQuiz.php?title='.$newTitle.'&errTitle=une erruer c&acuteest produite avec le titre');
     die();
 }
-
-$title = $_POST['newTitle'];
 
 unset($_POST['oldTitle']);
 unset($_POST['newTitle']);
@@ -56,7 +64,6 @@ foreach ($dividedArray as $i => $value) {
                 break;
         }
 
-        var_dump($value);
         $querie = "UPDATE QUESTION SET QUESTION = :newQuestion,
         REP1 = :newRep1,
         REP2 = :newRep2,
@@ -73,10 +80,13 @@ foreach ($dividedArray as $i => $value) {
             ':id' => $questionId[$i]['ID'],
         ]);
     } catch (\Throwable $th) {
-    header('location:myQuiz.php?title='.$title.'&errTitle=une erruer c&acuteest produite');
+    header('location:myQuiz.php?title='.$newTitle.'&errTitle=une erruer c&acuteest produite');
     die();
    }
 
     
     
 }
+
+header('location:allMyQuiz.php');
+die();

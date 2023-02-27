@@ -32,9 +32,10 @@ else $certif = '';
     <title>the choosen one</title>
 </head>
 <body id='choosenBody' class="fixBackground">
-    <header>
+    <header class="fullHeader">
     <?= headerDiv() ?>
-    <h1 style="margin-top: 0px;"><?= $title['TITLE']; ?></h1>
+   
+    <h1 class="titre_quizze" ><?= $title['TITLE']; ?></h1>
     </header>
     <main id="presentation">
         <h1>By <?= $userQuiz['USER_NAME'] ?></h1>

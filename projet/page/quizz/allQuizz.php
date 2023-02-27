@@ -33,13 +33,13 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
 <body id='allQuizz_body' class="fixBackground">
     <header>
         <?= headerDiv() ?>
-        <h2><?= strtoupper($theme['CATEGORY']) ?></h2>
+        <h1><?= strtoupper($theme['CATEGORY']) ?></h1>
     </header>
     <main class="nobkgr">
         <ul id="allQuizzUl">
             <?php
             $quizzValue =  '<img src="../../img/medaille1.png" alt="">';
-
+            $txtLength  = '';
             foreach ($allTitle as $i => $value) {
                 $diff = exeMultiSelect('SELECT DIFFICULT FROM TITLE WHERE ID = :id ;', ['id' => $value['ID']]);
                 switch ($diff[0]['DIFFICULT']) {
@@ -79,9 +79,10 @@ if (TokenSname() && $_SESSION['userName'] == 'admin') {
                     $quizzValue = $value['VALUE'];
                     }   else { $quizzValue =  '<img src="../../img/etoile.png" alt="">';}
                 }
-                
 
-                echo '<a href="presentation.php?id='.$value['ID'].'"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze">'. $value['TITLE'].'</p> <div>'.$quizzValue.'</div> </li></a>';
+                $txtLength = (strlen($value['TITLE']) > 25) ? 'small' : 'normal' ;                
+
+                echo '<a href="presentation.php?id='.$value['ID'].'" class="quizA"><li style="background-color:'.$color.';"> <p class="idQuiz"> '.$i.'</p> <p class="titre_quizze" style="font-size:'.$txtLength.';">'. $value['TITLE'].'</p> <div>'.$quizzValue.'</div> </li></a>';
                 
                 if ($adminOnly){
                     $isIt = 'block';

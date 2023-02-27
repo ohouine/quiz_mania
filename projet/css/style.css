@@ -311,8 +311,27 @@ ul{
 
 /* All quizz */
 
+#ulTheme{
+    width: 90%;
+}
+
 .fixBackground{
     background-attachment: fixed;
+}
+
+#allQuizzUl{
+    padding: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quizA{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #allQuizzUl div{
@@ -327,6 +346,10 @@ ul{
 
 #allQuizz_body a{
     display:flex;
+}
+
+#allQuizz_body main{
+    width: 100%;
 }
 
 #allQuizz_body header{
@@ -344,18 +367,20 @@ ul{
     margin-bottom: 1rem;
     justify-content: space-around;
     align-items: center;
-    width: 15rem;
+    width: 95%;
     height: 2rem;
     border-radius: 30px;
     padding: 0.2rem;
 }
 
 .titre_quizze{
-    width: 10rem;
+    width:70% ;
+    margin: 0px;
+    inline-size: 75%;
+    overflow-wrap: break-word;
 }
 
 .idQuiz{
-    width: 3rem;
     display: flex;
     justify-content: center;
 }
@@ -423,6 +448,15 @@ ul{
     border-top: solid 2px #8b1ac5;
 }
 
+.fullHeader{
+    width: 98%;
+}
+
+.fullHeader h1,h2{
+    font-size: medium;
+    margin-top: 1rem;
+}
+
 .rep{
     display: flex !important;
     justify-content: center !important;
@@ -435,7 +469,7 @@ ul{
     margin-top: 0.5rem !important;
     margin-bottom: 0.5rem !important;
     font-size: small !important;
-    border: solid 1px #c5b9b9 !important;
+    border: solid 1px #8b1ac5 !important;
 }
 
 .button-85 {

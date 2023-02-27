@@ -24,7 +24,7 @@ $allQuest = exeMultiSelect($querie,[':id' => $id]);
     <title>the choosen one</title>
 </head>
 <body id='choosenBody' class="fixBackground">
-    <header>
+    <header  class="fullHeader">
     <?= headerDiv() ?>
     <h2><?= $title; ?></h2>
     </header>

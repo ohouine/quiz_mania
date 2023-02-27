@@ -20,7 +20,7 @@ $color = '';
         <h2>THEME</h2>
     </header>
     <main class="nobkgr">
-        <ul>
+        <ul id="ulTheme">
             <?php
             
             $theme = exeMultiSelect('SELECT * FROM THEME;',[]);

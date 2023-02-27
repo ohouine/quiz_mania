@@ -45,9 +45,9 @@ if($mess != null) $titleErrorTxt = $mess;
 
     <main>
         <form action="allQuest.php" method="post" id="title">
-           <div> <h3>Quel est le titre de votre quizz ? </h3> <p>15 max</p> </div>
+           <div> <h3>Quel est le titre de votre quizz ? </h3> <p>30 max</p> </div>
            <span  class="error"><?= $titleErrorTxt ?></span>
-            <input type="text" name="title" id="title" maxlength="15">
+            <input type="text" name="title" id="title" maxlength="30">
             
             <label for="difficult">difficulté</label>
             <select name="difficult" id="difficult">

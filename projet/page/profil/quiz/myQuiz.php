@@ -5,6 +5,14 @@ session_start();
 require_once '../../function.php';
 
 $title = filter_input(INPUT_GET,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+if ($title === false || $title === null || verifieTitle($title)) {
+    header('location:../../../index.php?alert=une erreur c est produite avec votre titre desoler');
+    die();
+}
+
+$_SESSION['modifyId'] = exeSingleSelect('SELECT ID FROM TITLE WHERE TITLE = :title',[':title' => $title])['ID'];
+$_SESSION['modifyOldTitle'] = $title;
 $querie = 'SELECT * FROM QUESTION WHERE TITLE_ID = (SELECT ID FROM TITLE WHERE TITLE = :title);';
 $allQuest = exeMultiSelect($querie,[':title' => $title]);
 ?>
@@ -82,7 +90,6 @@ $allQuest = exeMultiSelect($querie,[':title' => $title]);
                 </div> ";
             }
             ?>
-            <input type="hidden" name="oldTitle" value="<?= $title ?>">
         
         <div><button class="button-85" role="button" id="sub">Modifier</button></div>
         
